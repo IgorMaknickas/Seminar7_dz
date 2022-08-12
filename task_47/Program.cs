@@ -1,35 +1,37 @@
 ﻿// Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
 
-int[,] GetArray(int m, int n, int min, int max)
+double[,] GetArray(int m, int n, int min, int max)
 {
-    int[,] result = new int[m, n];
+    Random rn = new Random();
+    double[,] result = new double[m, n];
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            result[i, j] = new Random().Next(min, max + 1);
+            result[i, j] = min + rn.NextDouble() * (max - min);
         }
     }
     return result;
 }
 
-void PrintArray(int[,] inArray)
+void PrintArray(double[,] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
         for (int j = 0; j < inArray.GetLength(1); j++)
         {
-            Console.Write($"{inArray[i, j]} ");
+            Console.Write(String.Format("{0,5:f1}",inArray[i, j]));
         }
         Console.WriteLine();
     }
 }
 
-Console.WriteLine("Введите количество строк массива: ");
+Console.Write("Введите количество строк массива: ");
 int rows = int.Parse(Console.ReadLine());
-Console.WriteLine("Введите количество столбцов массива: ");
+Console.Write("Введите количество столбцов массива: ");
 int columns = int.Parse(Console.ReadLine());
 
-int[,] array = GetArray(rows, columns, -10, 10);
+double[,] array = GetArray(rows, columns, -10, 10);
 
 PrintArray(array);
+
